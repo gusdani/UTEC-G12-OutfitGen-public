@@ -39,6 +39,14 @@ La demo representa el flujo de análisis, refinamiento y filtrado. No debe inter
 pytest
 ```
 
+## Paper y presentación
+
+- [Paper completo](docs/paper/Informe.pdf)
+- [Versión condensada](docs/paper/Informe-condensado.pdf)
+- [Presentación de defensa](docs/presentation/Defensa-OutfitGen.pptx)
+
+También puedes abrir estos documentos desde la sección **Documentos** de la demo. La aplicación pública es una versión reducida del sistema completo y los archivos académicos se incluyen como material de referencia.
+
 ## Alcance y licencia
 
 Este repositorio es una demostración académica. Revisa y añade una licencia antes de redistribuirlo formalmente.

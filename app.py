@@ -226,6 +226,7 @@ def _render_sidebar(result=None, page="Chat"):
             "Configuración LLM",
             "Arquitectura",
             "Acerca de",
+            "Documentos",
             "Login (referencia)",
             "Registro (referencia)",
         ]
@@ -404,6 +405,24 @@ def _render_about():
     _reference_banner("Las integraciones reales y los datos de producción no forman parte de este demo")
 
 
+def _render_documents():
+    st.title("Documentos del proyecto")
+    st.caption("Paper, resumen y presentación disponibles desde GitHub")
+    st.info("Estos documentos describen el proyecto académico completo. La demo ejecutable es una versión reducida y saneada.")
+    col_paper, col_presentation = st.columns(2)
+    with col_paper:
+        st.subheader("Paper")
+        st.write("Metodología, resultados, limitaciones y trabajo futuro.")
+        st.link_button("Abrir paper completo", "https://github.com/gusdani/UTEC-G12-OutfitGen-public/blob/master/docs/paper/Informe.pdf", use_container_width=True)
+        st.link_button("Abrir versión condensada", "https://github.com/gusdani/UTEC-G12-OutfitGen-public/blob/master/docs/paper/Informe-condensado.pdf", use_container_width=True)
+    with col_presentation:
+        st.subheader("Presentación")
+        st.write("Defensa con objetivos, metodología, arquitectura, CatBoost, resultados y conclusiones.")
+        st.link_button("Abrir presentación PPTX", "https://github.com/gusdani/UTEC-G12-OutfitGen-public/blob/master/docs/presentation/Defensa-OutfitGen.pptx", use_container_width=True)
+    st.divider()
+    st.caption("Los documentos fueron revisados y no contienen credenciales ni rutas locales detectadas.")
+
+
 def _render_auth_reference(register=False):
     st.title("Registrarme" if register else "Iniciar sesión")
     _reference_banner("Pantalla visual de referencia · no funcional en este demo")
@@ -428,7 +447,7 @@ page = st.query_params.get("page", "chat").replace("-", " ").title()
 page_aliases = {"Login (Referencia)": "Login (referencia)", "Registro (Referencia)": "Registro (referencia)", "Configuración Llm": "Configuración LLM"}
 page = page_aliases.get(page, page)
 result_for_sidebar = st.session_state.get("last_demo_result")
-selected_page = _render_sidebar(result_for_sidebar, page if page in ["Chat", "Reportes", "Perfil", "Configuración LLM", "Arquitectura", "Acerca de", "Login (referencia)", "Registro (referencia)"] else "Chat")
+selected_page = _render_sidebar(result_for_sidebar, page if page in ["Chat", "Reportes", "Perfil", "Configuración LLM", "Arquitectura", "Acerca de", "Documentos", "Login (referencia)", "Registro (referencia)"] else "Chat")
 
 if selected_page == "Chat":
     result_for_sidebar = _render_chat()
@@ -443,6 +462,8 @@ elif selected_page == "Arquitectura":
     _render_architecture()
 elif selected_page == "Acerca de":
     _render_about()
+elif selected_page == "Documentos":
+    _render_documents()
 elif selected_page == "Login (referencia)":
     _render_auth_reference()
 else:

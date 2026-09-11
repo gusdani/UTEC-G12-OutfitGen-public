@@ -49,4 +49,4 @@ También puedes abrir estos documentos desde la sección **Documentos** de la de
 
 ## Alcance y licencia
 
-Este repositorio es una demostración académica. Revisa y añade una licencia antes de redistribuirlo formalmente.
+Este repositorio es una demostración académica y se distribuye bajo la [Licencia MIT](LICENSE). Consulta el archivo `LICENSE` para conocer los términos de uso, copia, modificación y redistribución.

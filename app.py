@@ -6,6 +6,81 @@ from demo.catalog import CATALOG
 
 st.set_page_config(page_title="OutfitGen Demo", page_icon="👗", layout="wide")
 
+st.markdown(
+    """
+    <style>
+    :root {
+        --outfit-primary: #1E88E5;
+        --outfit-secondary: #3B82F6;
+        --outfit-accent: #1E3A8A;
+        --outfit-muted: #64748B;
+    }
+
+    .stApp {
+        background: #FFFFFF;
+    }
+
+    .main .block-container {
+        max-width: 1200px;
+        padding-top: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    h1, h2, h3 {
+        color: var(--outfit-accent);
+    }
+
+    [data-testid="stSidebar"] {
+        border-right: 1px solid #E2E8F0;
+    }
+
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background: transparent;
+        padding-bottom: 10px;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        height: 45px;
+        background: #F0F2F6;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        color: #262730;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 0 18px;
+        white-space: nowrap;
+    }
+
+    .stTabs [data-baseweb="tab"]:hover {
+        background: #E0E4E8;
+        border-color: var(--outfit-primary);
+    }
+
+    .stTabs [aria-selected="true"] {
+        background: var(--outfit-primary) !important;
+        border-color: var(--outfit-primary) !important;
+        box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3);
+        color: white !important;
+    }
+
+    .stButton > button {
+        border-radius: 8px;
+        border: 1px solid #CBD5E1;
+        font-weight: 600;
+    }
+
+    .stButton > button:hover {
+        border-color: var(--outfit-primary);
+        color: var(--outfit-primary);
+        transform: translateY(-1px);
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 
 def _catboost_demo(result):
     """Build an educational CatBoost view without loading a private model."""

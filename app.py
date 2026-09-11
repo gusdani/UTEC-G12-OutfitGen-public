@@ -29,8 +29,16 @@ def _catboost_demo(result):
 
 
 def _show_explanation_tabs(result):
-    tab_catboost, tab_agents, tab_embeddings, tab_architecture, tab_about = st.tabs(
-        ["🧠 CatBoost", "🤖 Agentes", "🎯 Embeddings", "🧩 Arquitectura", "ℹ️ Acerca de"]
+    tab_catboost, tab_agents, tab_embeddings, tab_reports, tab_config, tab_architecture, tab_about = st.tabs(
+        [
+            "🧠 CatBoost",
+            "🤖 Agentes",
+            "🎯 Embeddings",
+            "📊 Reportes",
+            "⚙️ Configuración LLM",
+            "🧩 Arquitectura",
+            "ℹ️ Acerca de",
+        ]
     )
 
     with tab_catboost:
@@ -74,6 +82,33 @@ def _show_explanation_tabs(result):
             hide_index=True,
             use_container_width=True,
         )
+
+    with tab_reports:
+        st.subheader("Reportes de la demo")
+        st.caption("Métricas ilustrativas del catálogo sintético, no datos de usuarios ni producción.")
+        metric_col1, metric_col2, metric_col3 = st.columns(3)
+        metric_col1.metric("Productos disponibles", len(CATALOG))
+        metric_col2.metric("Categorías", len({product["category"] for product in CATALOG}))
+        metric_col3.metric("Consultas externas", "0")
+        st.write("**Distribución del catálogo")
+        category_counts = {}
+        for product in CATALOG:
+            category_counts[product["category"]] = category_counts.get(product["category"], 0) + 1
+        st.bar_chart(category_counts, horizontal=True)
+        st.info("La versión completa puede alimentar esta sección con métricas persistidas en PostgreSQL.")
+
+    with tab_config:
+        st.subheader("Configuración de agentes LLM")
+        st.caption("Plantillas de referencia. La demo no llama a un LLM ni guarda cambios.")
+        prompts = {
+            "AnalizadorConsulta": "Extrae categoría, color y ocasión de la consulta del usuario.",
+            "EspecialistaOutfits": "Propón una combinación coherente con las prendas recuperadas.",
+            "PresentadorResultados": "Explica las recomendaciones de forma clara y breve.",
+        }
+        selected_agent = st.selectbox("Agente", list(prompts))
+        st.text_area("Prompt de ejemplo", value=prompts[selected_agent], height=120, disabled=True)
+        st.checkbox("Activo en modo completo", value=True, disabled=True)
+        st.warning("Las claves, temperaturas y prompts productivos se configuran fuera de este repositorio.")
 
     with tab_architecture:
         st.subheader("Flujo de la aplicación")
